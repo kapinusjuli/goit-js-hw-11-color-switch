@@ -18,18 +18,26 @@ function randomNumber(min, max) {
 startBtn.addEventListener('click', onStartBtn);
 stopBtn.addEventListener('click', onStopBtn);
 
+stopBtn.disabled = true;
+
 let intervalId = null;
 
 function onStartBtn() {
   intervalId = setInterval(() => {
-    body.style.backgroundColor = colors[randomNumber(0, 5)];
+    body.style.backgroundColor = colors[randomNumber(0, colors.length - 1)];
   }, 1000);
+
+  stopBtn.disabled = false;
+  startBtn.disabled = true;
 
   startBtn.removeEventListener('click', onStartBtn);
 }
 
 function onStopBtn() {
   clearInterval(intervalId);
+
+  stopBtn.disabled = true;
+  startBtn.disabled = false;
 
   startBtn.addEventListener('click', onStartBtn);
 }
